@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- ---------------------------------------BOOTSTRAP CDN -->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+
+<!-- ---------------------------------------FONT AWESOME CDN -->
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
+
+<!-- ---------------------------------------J-QUERY CDN -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand navbar-dark bg-primary sticky-top">
+    <div class="container">
+          <div class="collapse navbar-collapse" id="basicExampleNav">
+                <ul class="navbar-nav mr-auto">
+                      <li class="nav-item">
+                            <a class="nav-link" href="/">All Contacts</a>
+                      </li>
+                      <li class="nav-item">
+                            <a class="nav-link" href="#">Groups</a>
+                      </li>
+                </ul>
+                <button onclick="window.location.href='/new/'" class="btn btn-outline-light">Add Contact</button>
+          </div>
+        </div>
+</nav>
+<form action="" method="POST">
+    <input type="text" name="first_name" placeholder="first name" value="{{ contact.first_name }}">
+    <input type="text" name="last_name" placeholder="last name" value="{{ contact.last_name }}">
+    <input type="text" name="description" placeholder="description" value="{{ contact.description }}">
+    <input type="submit" value="save">
+</form>
+</body>
+</html>

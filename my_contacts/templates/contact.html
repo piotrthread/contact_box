@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- ---------------------------------------BOOTSTRAP CDN -->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+
+<!-- ---------------------------------------FONT AWESOME CDN -->
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
+
+<!-- ---------------------------------------J-QUERY CDN -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        .hidden{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand navbar-dark bg-primary">
+    <div class="container">
+          <div class="collapse navbar-collapse" id="basicExampleNav">
+                <ul class="navbar-nav mr-auto">
+                      <li class="nav-item">
+                            <a class="nav-link" href="/">All Contacts</a>
+                      </li>
+                      <li class="nav-item">
+                            <a class="nav-link" href="#">Groups</a>
+                      </li>
+                </ul>
+                <button onclick="window.location.href='/new/'" class="btn btn-outline-light">Add Contact</button>
+          </div>
+        </div>
+</nav>
+<section class="info d-flex justify-content-center">
+    <div class="col-lg-6">
+        <div class="container px-5 pt-5 pb-1">
+            <div class="d-flex flex-row justify-content-end align-items-center">
+                <h2 class="display-4 text-primary mr-auto" style="font-size:45px;">{{ contact.first_name }} {{ contact.last_name }}</h2>
+                <button onclick="window.location.href='/modify/{{ contact.id }}'" class="btn btn-outline-secondary">Edit</button>
+            </div>
+
+            <h4 style="font-size:20px;"><small class="text-secondary ml-2">{{ contact.description }}</small></h4>
+        </div>
+    {% if phone or adress or email %}
+        <div class="container px-5">
+            <div class="container">
+                <hr>
+            </div>
+        </div>
+    {% endif %}
+        <div class="container px-5 text-secondary">
+            {% if phone %}
+                {% for p in phone %}
+                    <h3 class="d-flex flex-row align-items-center p-2" style="font-size:20px;">
+                        {% if p.number_type == "Mobile" %}
+                            <div class="d-flex flex-row justify-content-center" style="width:30px;"><small><i class="fas fa-mobile-alt mr-3"></i></small></div>
+                        {% elif p.number_type == "Home" %}
+                            <div class="d-flex flex-row justify-content-center" style="width:30px;"><small><i class="fas fa-home mr-3"></i></small></div>
+                        {% elif p.number_type == "Work" %}
+                            <div class="d-flex flex-row justify-content-center" style="width:30px;"><small><i class="fas fa-briefcase mr-3"></i></small></div>
+                        {% endif %}
+                        <small>{{ p.number }}</small>
+                        <small><a href='../{{ p.person_id }}/deletePhone/{{ p.id }}' class="text-danger ml-3"><i class="fas fa-minus-circle"></i></a></small>
+                    </h3>
+                {% endfor %}
+                <div class="container">
+                    <hr>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="container px-5 text-secondary">
+            {% if email %}
+                {% for e in email %}
+                    <h3 class="d-flex flex-row align-items-center p-2" style="font-size:20px;">
+                        {% if e.email_type == "Personal" %}
+                            <div class="d-flex flex-row justify-content-center" style="width:30px;"><small><i class="fas fa-user mr-3"></i></small></div>
+                        {% elif e.email_type == "Work" %}
+                            <div class="d-flex flex-row justify-content-center" style="width:30px;"><small><i class="fas fa-briefcase mr-3"></i></small></div>
+                        {% endif %}
+                        <small>{{ e.email }}</small>
+                        <small><a href='../{{ e.person_id }}/deleteEmail/{{ e.id }}' class="text-danger ml-3"><i class="fas fa-minus-circle"></i></a></small>
+                    </h3>
+                {% endfor %}
+                <div class="container">
+                    <hr>
+                </div>
+            {% endif %}
+        </div>
+        <div class="container px-5 text-secondary">
+            {% if adress %}
+                {% for a in adress %}
+                    <h3 class="d-flex flex-row align-items-center p-2" style="font-size:20px;">
+                        <div class="d-flex flex-row justify-content-center" style="width:30px;"><small><i class="fas fa-map-marker-alt mr-3"></i></small></div>
+                        <small>{{ a.city }}, {{ a.street }} {{ a.street_no }}/{{ a.apartament_no }}</small>
+                        <small><a href='../{{ a.person_id }}/deleteAdress/{{ a.id }}' class="text-danger ml-3"><i class="fas fa-minus-circle"></i></a></small>
+                    </h3>
+                {% endfor %}
+                <div class="container">
+                    <hr>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+<section class="add_forms d-flex justify-content-center mt-2">
+    <div class="col-lg-6">
+        <div class="container px-5 py-1 text-secondary">
+             <button class="adress_btn btn btn-primary">+ Adress</button>
+             <button class="email_btn btn btn-primary">+ Email</button>
+             <button class="phone_btn btn btn-primary">+ Phone Number</button>
+        </div>
+    </div>
+</section>
+<section class="adress hidden">
+    <div class="d-flex justify-content-center" style="z-index:1; position: absolute; top:0; width:100vw; height:100vh; background-color:rgba(0,0,0,.6);">
+        <div class="bg-primary px-5 pt-5 pb-4 col-lg-4 col-xl-4 col-md-8 col-10 col-sm-10 rounded my-auto">
+            <form action="../{{ contact.id }}/addAdress" method="POST">
+                <div class="form-group">
+                    <input type="text" name="street" placeholder="Street Name" class="form-control m-2">
+                    <input type="text" name="street_no" placeholder="Street NO." class="form-control m-2">
+                    <input type="text" name="apartament" placeholder="Apartament NO." class="form-control m-2">
+                    <input type="text" name="city" placeholder="City Name" class="form-control m-2">
+                    <input type="submit" value="+ Add New Adress" class="form-control btn btn-outline-light m-2">
+                </div>
+            </form>
+            <a href="" class="email_btn text-light" style="position:absolute; top:20px; right:25px;"><i class="fas fa-times"></i></a>
+        </div>
+    </div>
+</section>
+<section class="email hidden">
+    <div class="d-flex justify-content-center" style="z-index:1; position: absolute; top:0; width:100vw; height:100vh; background-color:rgba(0,0,0,.6);">
+        <div class="bg-primary px-5 pt-5 pb-4 col-lg-4 col-xl-4 col-md-8 col-10 col-sm-10 rounded my-auto">
+            <form action="../{{ contact.id }}/addEmail" method="POST">
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Email Adress" class="form-control m-2">
+                    <select name="email_type" class="form-control m-2">
+                        <option value="Work">Work</option>
+                        <option value="Personal">Personal</option>
+                    </select>
+                    <input type="submit" value="+ Add Email" class="form-control btn btn-outline-light m-2">
+                </div>
+            </form>
+            <a href="" class="email_btn text-light" style="position:absolute; top:20px; right:25px;"><i class="fas fa-times"></i></a>
+        </div>
+    </div>
+</section>
+<section class="phone hidden">
+    <div class="d-flex justify-content-center" style="z-index:1; position: absolute; top:0; width:100vw; height:100vh; background-color:rgba(0,0,0,.6);">
+        <div class="bg-primary px-5 pt-5 pb-4 col-lg-4 col-xl-4 col-md-8 col-10 col-sm-10 rounded my-auto">
+            <form action="../{{ contact.id }}/addPhone" method="POST">
+                <div class="form-group">
+                    <input type="text" name="number" placeholder="Phone Number" class="form-control m-2">
+                    <select name="number_type" class="form-control m-2">
+                        <option value="Work">Work</option>
+                        <option value="Home">Home</option>
+                        <option value="Mobile">Mobile</option>
+                    </select>
+                    <input type="submit" value="+ Add Phone Number" class="form-control btn btn-outline-light m-2">
+                </div>
+            </form>
+            <a href="" class="phone_btn text-light" style="position:absolute; top:20px; right:25px;"><i class="fas fa-times"></i></a>
+        </div>
+    </div>
+</section>
+<script>
+    adressButton = document.querySelectorAll(".adress_btn");
+    adressForm = document.querySelector(".adress");
+    adressButton.forEach(function (element) {
+        element.addEventListener("click",function () {
+        adressForm.classList.toggle("hidden");
+        });
+    });
+    emailButton = document.querySelectorAll(".email_btn");
+    emailForm = document.querySelector(".email");
+    emailButton.forEach(function (element) {
+        element.addEventListener("click",function () {
+        emailForm.classList.toggle("hidden");
+        });
+    });
+    phoneButton = document.querySelectorAll(".phone_btn");
+    phoneForm = document.querySelector(".phone");
+    phoneButton.forEach(function (element) {
+        element.addEventListener("click",function () {
+        phoneForm.classList.toggle("hidden");
+        });
+    });
+</script>
+</body>
+</html>
