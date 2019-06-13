@@ -86,3 +86,49 @@ def add_phone(request, id):
     PhoneNumber.objects.create(number=request.POST.get("number"), number_type=request.POST.get("number_type"), person=person)
 
     return redirect(f'../show/{id}')
+
+def all_groups(request):
+    groups = Group.objects.all().order_by("name")
+    return render(request,"allgroups.html",{
+        'groups': groups
+    })
+
+def del_group(request,to_delete):
+    Group.objects.get(pk=to_delete).delete()
+    return redirect('/groups')
+
+@csrf_exempt
+def add_group(request):
+    if request.method == "POST":
+        new_group = Group.objects.create(name=request.POST.get("group_name"))
+
+        return redirect(f'../groups/show/{new_group.id}')
+
+    else:
+        return render(request,"addgroup.html")
+
+def group_by_id(request,id):
+    members = Person.objects.filter(group=id)
+    group = Group.objects.get(pk=id)
+
+    return render(request, "group.html", {
+        'members': members,
+        'group_id': id,
+        'group': group
+    })
+
+def delete_from_group(request, group_id, person_id):
+    group = Group.objects.get(pk=group_id)
+    person = Person.objects.get(pk=person_id)
+    person.group.remove(group)
+    person.save()
+
+    return redirect(f'../../../groups/show/{group_id}')
+
+def add_members(request,group_id):
+    if request.method == "GET":
+        contacts = Person.objects.all().order_by("last_name")
+        return render(request,"addmembers.html", {
+            'group_id': group_id,
+            'contacts': contacts,
+        })

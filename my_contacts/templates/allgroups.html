@@ -40,15 +40,17 @@
           </div>
         </div>
 </nav>
-<section class="container">
-    <div class="row justify-content-center">
-        <form action="" method="POST" class="col-6 m-5">
-            <input class="form-control m-2"  type="text" name="first_name" placeholder="first name" value="{{ contact.first_name }}">
-            <input class="form-control m-2"  type="text" name="last_name" placeholder="last name" value="{{ contact.last_name }}">
-            <input class="form-control m-2"  type="text" name="description" placeholder="description" value="{{ contact.description }}">
-            <input class="form-control m-2 btn btn-primary"  type="submit" value="+ Save">
-        </form>
-    </div>
-</section>
+
+<div class="container d-flex justify-content-center">
+    <ul class="list-group w-100 p-5">
+    {% for group in groups %}
+        <li class="list-group-item d-flex flex-row justify-content-end align-items-center py-3 pl-4"><a href="show/{{ group.id }}" class="mr-auto text-secondary display-4" style="font-size:17px;">{{ group.name }}</a>
+        <button onclick="window.location.href='delete/{{ group.id }}'" class="btn btn-outline-primary">Delete</button>
+         </li>
+    {% endfor %}
+</ul>
+</div>
+
+
 </body>
 </html>

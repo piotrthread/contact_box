@@ -30,4 +30,10 @@ urlpatterns = [
     path('<id>/deleteAdress/<to_delete>', del_adress),
     path('<id>/deleteEmail/<to_delete>', del_email),
     path('<id>/deletePhone/<to_delete>', del_phone),
+    path('groups/', all_groups),
+    path('groups/delete/<to_delete>', del_group),
+    path('newGroup/', add_group),
+    path('groups/show/<id>', group_by_id),
+    path('groups/<group_id>/delete/<person_id>', delete_from_group),
+    path('groups/<group_id>/addMembers', add_members),
 ]

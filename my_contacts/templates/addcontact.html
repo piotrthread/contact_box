@@ -32,18 +32,27 @@
                             <a class="nav-link" href="/">All Contacts</a>
                       </li>
                       <li class="nav-item">
-                            <a class="nav-link" href="#">Groups</a>
+                            <a class="nav-link" href="/groups">Groups</a>
                       </li>
                 </ul>
-                <button onclick="window.location.href='/new/'" class="btn btn-outline-light">Add Contact</button>
+                <button onclick="window.location.href='/new/'" class="btn btn-outline-light">+ Add Contact</button>
+                <button onclick="window.location.href='/newGroup/'" class="btn btn-outline-light ml-2">+ Add Group</button>
           </div>
         </div>
 </nav>
-<form action="" method="POST">
-    <input type="text" name="first_name" placeholder="first name">
-    <input type="text" name="last_name" placeholder="last name">
-    <input type="text" name="description" placeholder="description">
-    <input type="submit" value="add contact">
-</form>
+<section class="container">
+    <div class="row justify-content-center">
+            <form action="" method="POST" class="col-6 m-5">
+                <div class="form-group">
+                    <input class="form-control m-2" type="text" name="first_name" placeholder="first name">
+                    <input class="form-control m-2"  type="text" name="last_name" placeholder="last name">
+                    <input class="form-control m-2"  type="text" name="description" placeholder="description">
+                    <input class="form-control m-2 btn btn-primary"  type="submit" value="+ Add Contact">
+                </div>
+        </form>
+        </div>
+    </div>
+</section>
+
 </body>
 </html>

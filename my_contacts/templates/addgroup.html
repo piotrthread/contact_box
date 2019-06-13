@@ -42,13 +42,15 @@
 </nav>
 <section class="container">
     <div class="row justify-content-center">
-        <form action="" method="POST" class="col-6 m-5">
-            <input class="form-control m-2"  type="text" name="first_name" placeholder="first name" value="{{ contact.first_name }}">
-            <input class="form-control m-2"  type="text" name="last_name" placeholder="last name" value="{{ contact.last_name }}">
-            <input class="form-control m-2"  type="text" name="description" placeholder="description" value="{{ contact.description }}">
-            <input class="form-control m-2 btn btn-primary"  type="submit" value="+ Save">
+            <form action="" method="POST" class="col-6 m-5">
+                <div class="form-group">
+                    <input class="form-control m-2" type="text" name="group_name" placeholder="group name">
+                    <input class="form-control m-2 btn btn-primary"  type="submit" value="+ Add Group">
+                </div>
         </form>
+        </div>
     </div>
 </section>
+
 </body>
 </html>
