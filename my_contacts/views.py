@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from my_contacts.models import *
 
@@ -132,3 +133,11 @@ def add_members(request,group_id):
             'group_id': group_id,
             'contacts': contacts,
         })
+def add_member_to_group(request,person_id,group_id):
+    person = Person.objects.get(pk=person_id)
+    group = Group.objects.get(pk=group_id)
+    person.group.add(group)
+    person.save()
+
+    return redirect(f'../../../groups/show/{group_id}')
+

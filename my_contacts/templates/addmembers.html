@@ -44,9 +44,8 @@
 <div class="container d-flex justify-content-center">
     <ul class="list-group w-100 p-5">
     {% for person in contacts %}
-        <li class="list-group-item d-flex flex-row justify-content-end align-items-center py-3 pl-4"><a href="show/{{ person.id }}" class="mr-auto text-secondary display-4" style="font-size:17px;">{{ person.last_name }} {{ person.first_name }} - {{ person.description }}</a>
-        <button onclick="window.location.href='/modify/{{ person.id }}'" class="btn btn-outline-secondary mr-2">Edit</button>
-        <button onclick="window.location.href='/delete/{{ person.id }}'" class="btn btn-outline-primary">Delete</button>
+        <li class="list-group-item d-flex flex-row justify-content-end align-items-center py-3 pl-4"><span class="mr-auto text-secondary display-4" style="font-size:17px;">{{ person.last_name }} {{ person.first_name }} - {{ person.description }}</span>
+        <button onclick="window.location.href='/add/{{ person.id }}/group/{{ group_id }}'" class="btn btn-outline-primary">+ Add</button>
          </li>
     {% endfor %}
 </ul>

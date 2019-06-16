@@ -36,4 +36,5 @@ urlpatterns = [
     path('groups/show/<id>', group_by_id),
     path('groups/<group_id>/delete/<person_id>', delete_from_group),
     path('groups/<group_id>/addMembers', add_members),
+    path('add/<person_id>/group/<group_id>', add_member_to_group),
 ]
